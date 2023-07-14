@@ -1,4 +1,7 @@
 import { toPng } from "html-to-image";
+// adds the language function to look up the corresponding language
+// all Text elements are saved in sImpExp.js (_s.sImpExp.KeyToText)
+import _s from '../lang/lang.js'
 
 export class ImportExport {
   constructor(presenter, domRoot) {
@@ -20,7 +23,7 @@ export class ImportExport {
       "tooltip-bottom",
       "hand"
     );
-    importDiv.setAttribute("data-tooltip", "Laden");
+    importDiv.setAttribute("data-tooltip", _s.sImpExp.load);
     const importInput = document.createElement("input");
     importInput.setAttribute("type", "file");
     importInput.addEventListener("change", (e) => this.presenter.readFile(e));
@@ -43,7 +46,7 @@ export class ImportExport {
       "tooltip-bottom",
       "hand"
     );
-    saveDiv.setAttribute("data-tooltip", "Speichern");
+    saveDiv.setAttribute("data-tooltip", _s.sImpExp.save);
     saveDiv.addEventListener("click", () => this.presenter.saveDialog());
     document.getElementById("optionButtons").appendChild(saveDiv);
 
@@ -56,7 +59,7 @@ export class ImportExport {
       "tooltip-bottom",
       "hand"
     );
-    exportDiv.setAttribute("data-tooltip", "Bildexport");
+    exportDiv.setAttribute("data-tooltip", _s.sImpExp.imageExport);
     exportDiv.addEventListener("click", () =>
       this.exportAsPng(this.presenter.getModelTree())
     );

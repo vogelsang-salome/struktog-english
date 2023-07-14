@@ -1,6 +1,6 @@
 import { newElement } from '../helpers/domBuilding'
 // adds the language function to look up the corresponding language
-// all Text elements are saved in sStructo.js (_s.sCode.KeyToText)
+// all Text elements are saved in sCode.js (_s.sCode.KeyToText)
 import _s from '../lang/lang.js'
 
 export class CodeView {
