@@ -1,6 +1,7 @@
 import { config } from '../config.js'
 import { generateResetButton } from '../helpers/generator'
 import { newElement } from '../helpers/domBuilding'
+import _s from '../lang/lang.js'
 
 export class Structogram {
   constructor (presenter, domRoot) {
@@ -30,7 +31,7 @@ export class Structogram {
     // divHeader.classList.add('elementButtonColumns');
     const spanHeader = document.createElement('strong')
     spanHeader.classList.add('margin-small')
-    spanHeader.appendChild(document.createTextNode('Element wählen:'))
+    spanHeader.appendChild(document.createTextNode(_s.sStructo.chooseElement))
     divHeader.appendChild(spanHeader)
     divInsert.appendChild(divHeader)
 
@@ -47,7 +48,7 @@ export class Structogram {
     divEditorHeadline.classList.add('columnEditorFull', 'headerContainer')
     const editorHeadline = document.createElement('strong')
     editorHeadline.classList.add('margin-small', 'floatBottom')
-    editorHeadline.appendChild(document.createTextNode('Editor:'))
+    editorHeadline.appendChild(document.createTextNode(_s.sStructo.editor))
     divEditorHeadline.appendChild(editorHeadline)
 
     const optionsContainer1 = document.createElement('div')
@@ -110,7 +111,7 @@ export class Structogram {
   generateUndoRedoButtons (presenter, domNode) {
     const undo = document.createElement('div')
     undo.classList.add('struktoOption', 'undoIcon', 'tooltip', 'tooltip-bottom', 'hand')
-    undo.setAttribute('data-tooltip', 'Undo')
+    undo.setAttribute('data-tooltip', _s.sStructo.undo)
     domNode.appendChild(undo)
     const undoOverlay = document.createElement('div')
     undoOverlay.classList.add('fullWidth', 'fullHeight', 'UndoIconButtonOverlay', 'disableIcon')
@@ -119,7 +120,7 @@ export class Structogram {
 
     const redo = document.createElement('div')
     redo.classList.add('struktoOption', 'redoIcon', 'tooltip', 'tooltip-bottom', 'hand')
-    redo.setAttribute('data-tooltip', 'Redo')
+    redo.setAttribute('data-tooltip', _s.sStructo.redo)
     domNode.appendChild(redo)
     const redoOverlay = document.createElement('div')
     redoOverlay.classList.add('fullWidth', 'fullHeight', 'RedoIconButtonOverlay', 'disableIcon')
@@ -192,7 +193,7 @@ export class Structogram {
       removeParamBtn.classList.add('trashcan', 'optionIcon', 'hand', 'tooltip', 'tooltip-bottoml')
       removeParamBtn.style.minWidth = '1.2em'
       removeParamBtn.style.border = 'none'
-      removeParamBtn.setAttribute('data-tooltip', 'Entfernen')
+      removeParamBtn.setAttribute('data-tooltip', _s.sStructo.remove)
       removeParamBtn.addEventListener('click', () => {
         this.presenter.removeParamFromParameters(pos)
       })
@@ -367,7 +368,7 @@ export class Structogram {
     addParamBtn.classList.add('addCaseIcon', 'hand', 'caseOptionsIcons', 'tooltip', 'tooltip-bottom')
     addParamBtn.style.marginTop = 'auto'
     addParamBtn.style.marginBottom = 'auto'
-    addParamBtn.setAttribute('data-tooltip', 'Parameter hinzufügen')
+    addParamBtn.setAttribute('data-tooltip', _s.sStructo.addParameter)
     addParamBtn.addEventListener('click', () => {
       addParamBtn.remove()
       const countParam = document.getElementsByClassName('function-elem').length - 1
@@ -446,7 +447,7 @@ export class Structogram {
                   if (this.presenter.getMoveId() && subTree.followElement && subTree.followElement.id === this.presenter.getMoveId()) {
                     const bold = document.createElement('strong')
                     bold.classList.add('moveText')
-                    bold.appendChild(document.createTextNode('Verschieben abbrechen'))
+                    bold.appendChild(document.createTextNode(_s.sStructo.cancelMove))
                     div.appendChild(bold)
                   } else {
                     const symbol = document.createElement('div')
@@ -478,7 +479,7 @@ export class Structogram {
                     if (this.presenter.getMoveId() && subTree.followElement && subTree.followElement.id === this.presenter.getMoveId()) {
                       const bold = document.createElement('strong')
                       bold.classList.add('moveText')
-                      bold.appendChild(document.createTextNode('Verschieben abbrechen'))
+                      bold.appendChild(document.createTextNode(_s.sStructo.cancelMove))
                       div.appendChild(bold)
                     } else {
                       const symbol = document.createElement('div')
@@ -571,11 +572,11 @@ export class Structogram {
 
           const divHeaderTrue = document.createElement('div')
           divHeaderTrue.classList.add('columnAuto', 'text-left', 'bottomHeader')
-          divHeaderTrue.appendChild(document.createTextNode('Wahr'))
+          divHeaderTrue.appendChild(document.createTextNode(_s.sStructo.true))
 
           const divHeaderFalse = document.createElement('div')
           divHeaderFalse.classList.add('columnAuto', 'text-right', 'bottomHeader')
-          divHeaderFalse.appendChild(document.createTextNode('Falsch'))
+          divHeaderFalse.appendChild(document.createTextNode(_s.sStructo.false))
 
           divHeadBottom.appendChild(divHeaderTrue)
           divHeadBottom.appendChild(divHeaderFalse)
@@ -616,7 +617,7 @@ export class Structogram {
           const optionDiv = this.createOptionDiv(subTree.type, subTree.id)
           divTry.appendChild(optionDiv)
           const textTry = newElement('div', ['symbol'], divTry)
-          textTry.appendChild(document.createTextNode('Try'))
+          textTry.appendChild(document.createTextNode(_s.sStructo.try))
 
           const divTryContent = newElement('div', ['columnAuto', 'container', 'loopShift'], divTryCatchNode)
           const divTryContentBody = newElement('div', ['loopWidth', 'frameLeft', 'vcontainer'], divTryContent)
@@ -633,7 +634,7 @@ export class Structogram {
 
           const divCatch = newElement('div', ['container', 'fixedHeight', 'padding', 'tryCatchNode'], divTryCatchNode)
           const textCatch = newElement('div', ['symbol'], divCatch)
-          textCatch.appendChild(document.createTextNode('Catch'))
+          textCatch.appendChild(document.createTextNode(_s.sStructo.catch))
 
           const textDiv = this.createTextDiv(subTree.type, subTree.text, subTree.id)
           divCatch.appendChild(textDiv)
@@ -924,7 +925,7 @@ export class Structogram {
     const element = this.presenter.getElementByUid(uid)
 
     const title = document.createElement('strong')
-    title.appendChild(document.createTextNode('Einstellungen der ' + config.get().CaseNode.text + ': '))
+    title.appendChild(document.createTextNode(_s.sStructo.settingsOf + config.get().CaseNode.text + ': '))
     content.appendChild(title)
     const elementText = document.createElement('div')
     elementText.classList.add('caseTitle', 'boldText')
@@ -936,7 +937,7 @@ export class Structogram {
     content.appendChild(list)
     const caseNumberTitle = document.createElement('dt')
     caseNumberTitle.classList.add('dtItem')
-    caseNumberTitle.appendChild(document.createTextNode('Anzahl der Fälle:'))
+    caseNumberTitle.appendChild(document.createTextNode(_s.sStructo.numberOfCases))
     list.appendChild(caseNumberTitle)
     const caseNumber = document.createElement('dd')
     caseNumber.classList.add('ddItem', 'container')
@@ -951,12 +952,12 @@ export class Structogram {
       this.presenter.addCase(uid)
       this.openCaseOptions(uid)
     })
-    addCase.setAttribute('data-tooltip', 'Fall hinzufügen')
+    addCase.setAttribute('data-tooltip', _s.sStructo.addCase)
     caseNumber.appendChild(addCase)
 
     const defaultOnTitle = document.createElement('dt')
     defaultOnTitle.classList.add('dtItem')
-    defaultOnTitle.appendChild(document.createTextNode('Sonst Zweig einschalten:'))
+    defaultOnTitle.appendChild(document.createTextNode(_s.sStructo.otherwiseBranch))
     list.appendChild(defaultOnTitle)
     const defaultOn = document.createElement('dd')
     defaultOn.classList.add('ddItem', 'container')
@@ -967,10 +968,10 @@ export class Structogram {
     list.appendChild(defaultOn)
     const defaultNo = document.createElement('div')
     defaultNo.classList.add('text-center', 'shortenOnMobile')
-    defaultNo.setAttribute('data-abbr', 'N')
+    defaultNo.setAttribute('data-abbr', _s.sStructo.shortNo)
     defaultOn.appendChild(defaultNo)
     const defaultNoText = document.createElement('span')
-    defaultNoText.appendChild(document.createTextNode('Nein'))
+    defaultNoText.appendChild(document.createTextNode(_s.sStructo.no))
     defaultNo.appendChild(defaultNoText)
     const switchDefault = document.createElement('div')
     switchDefault.classList.add('hand', 'caseOptionsIcons')
@@ -982,15 +983,15 @@ export class Structogram {
     defaultOn.appendChild(switchDefault)
     const defaultYes = document.createElement('div')
     defaultYes.classList.add('text-center', 'shortenOnMobile')
-    defaultYes.setAttribute('data-abbr', 'J')
+    defaultYes.setAttribute('data-abbr', _s.sStructo.shortYes)
     defaultOn.appendChild(defaultYes)
     const defaultYesText = document.createElement('span')
-    defaultYesText.appendChild(document.createTextNode('Ja'))
+    defaultYesText.appendChild(document.createTextNode(_s.sStructo.yes))
     defaultYes.appendChild(defaultYesText)
 
     const cancelButton = document.createElement('div')
     cancelButton.classList.add('modal-buttons', 'hand')
-    cancelButton.appendChild(document.createTextNode('Schließen'))
+    cancelButton.appendChild(document.createTextNode(_s.sStructo.close))
     cancelButton.addEventListener('click', () => document.getElementById('IEModal').classList.remove('active'))
     footer.appendChild(cancelButton)
 
@@ -1013,7 +1014,7 @@ export class Structogram {
     if (type === 'CaseNode') {
       const caseOptions = document.createElement('div')
       caseOptions.classList.add('gearIcon', 'optionIcon', 'hand', 'tooltip', 'tooltip-bottoml')
-      caseOptions.setAttribute('data-tooltip', 'Einstellung')
+      caseOptions.setAttribute('data-tooltip', _s.sStructo.settings)
       caseOptions.addEventListener('click', () => this.openCaseOptions(uid))
       optionDiv.appendChild(caseOptions)
     }
@@ -1026,7 +1027,7 @@ export class Structogram {
       moveElem.classList.add('hand')
       moveElem.classList.add('tooltip')
       moveElem.classList.add('tooltip-bottoml')
-      moveElem.setAttribute('data-tooltip', 'Verschieben')
+      moveElem.setAttribute('data-tooltip', _s.sStructo.move)
       moveElem.addEventListener('click', () => this.presenter.moveElement(uid))
       optionDiv.appendChild(moveElem)
     }
@@ -1038,7 +1039,7 @@ export class Structogram {
     deleteElem.classList.add('hand')
     deleteElem.classList.add('tooltip')
     deleteElem.classList.add('tooltip-bottoml')
-    deleteElem.setAttribute('data-tooltip', 'Entfernen')
+    deleteElem.setAttribute('data-tooltip', _s.sStructo.remove)
     deleteElem.addEventListener('click', () => this.presenter.removeElement(uid))
     optionDiv.appendChild(deleteElem)
 
@@ -1244,7 +1245,7 @@ export class Structogram {
                 const text = document.createElement('div')
                 if (this.presenter.getMoveId() && subTree.followElement && subTree.followElement.id === this.presenter.getMoveId()) {
                   const bold = document.createElement('strong')
-                  bold.appendChild(document.createTextNode('Verschieben abbrechen'))
+                  bold.appendChild(document.createTextNode(_s.sStructo.cancelMove))
                   text.appendChild(bold)
                 } else {
                   text.classList.add('insertIcon')
@@ -1333,13 +1334,13 @@ export class Structogram {
           const divSubHeaderTrue = document.createElement('div')
           divSubHeaderTrue.classList.add('column')
           divSubHeaderTrue.classList.add('col-6')
-          divSubHeaderTrue.appendChild(document.createTextNode('Wahr'))
+          divSubHeaderTrue.appendChild(document.createTextNode(_s.sStructo.true))
 
           const divSubHeaderFalse = document.createElement('div')
           divSubHeaderFalse.classList.add('column')
           divSubHeaderFalse.classList.add('col-6')
           divSubHeaderFalse.classList.add('text-right')
-          divSubHeaderFalse.appendChild(document.createTextNode('Falsch'))
+          divSubHeaderFalse.appendChild(document.createTextNode(_s.sStructo.false))
 
           divSubHeader.appendChild(divSubHeaderTrue)
           divSubHeader.appendChild(divSubHeaderFalse)
