@@ -1,4 +1,7 @@
 import { newElement } from '../helpers/domBuilding'
+// adds the language function to look up the corresponding language
+// all Text elements are saved in sStructo.js (_s.sCode.KeyToText)
+import _s from '../lang/lang.js'
 
 export class CodeView {
   constructor (presenter, domRoot) {
@@ -10,7 +13,7 @@ export class CodeView {
         untranslatable: [],
         InputNode: {
           pre: '',
-          post: ' = input("Eingabe")\n'
+          post: ' = input("' + _s.sCode.input + '")\n'
         },
         OutputNode: {
           pre: 'print(',
@@ -66,7 +69,7 @@ export class CodeView {
         untranslatable: [],
         InputNode: {
           pre: '',
-          post: ' = input("Eingabe")\n'
+          post: ' = input("' + _s.sCode.input + '")\n'
         },
         OutputNode: {
           pre: 'print(',
@@ -122,7 +125,7 @@ export class CodeView {
         untranslatable: [],
         InputNode: {
           pre: '',
-          post: ' = readline("Eingabe");\n'
+          post: ' = readline("' + _s.sCode.input + '");\n'
         },
         OutputNode: {
           pre: 'echo ',
@@ -411,7 +414,7 @@ export class CodeView {
     sourcecodeHeader.classList.add('columnAuto', 'container')
     const sourcecodeTitle = document.createElement('strong')
     sourcecodeTitle.classList.add('center')
-    sourcecodeTitle.appendChild(document.createTextNode('Übersetzen in:'))
+    sourcecodeTitle.appendChild(document.createTextNode(_s.sCode.translateTo))
     const sourcecodeForm = document.createElement('div')
     sourcecodeForm.classList.add('center')
     const sourcecodeSelect = document.createElement('select')
@@ -430,7 +433,7 @@ export class CodeView {
     }
 
     const sourcecodeCopy = document.createElement('div')
-    sourcecodeCopy.setAttribute('data-tooltip', 'Kopiere Code')
+    sourcecodeCopy.setAttribute('data-tooltip', _s.sCode.copyCode)
     sourcecodeCopy.classList.add('center', 'copyIcon', 'struktoOption', 'sourcecodeHeader', 'hand', 'tooltip')
     sourcecode.addEventListener('click', function (event) {
       navigator.clipboard.writeText(localStorage.getItem('struktog_code'))
@@ -498,7 +501,7 @@ export class CodeView {
           codeText = codeText + i.textContent
         })
       } else {
-        codeBlock.appendChild(document.createTextNode('Das Struktogramm enthält Elemente, \nwelche in der gewählten Programmiersprache \nnicht direkt zur Verfügung stehen.\nDeshalb bitte manuell in Code überführen.'))
+        codeBlock.appendChild(document.createTextNode(_s.sCode.elementsNotAvailable))
       }
       localStorage.setItem('struktog_code', codeText)
 
@@ -510,7 +513,7 @@ export class CodeView {
   generateCodeSwitch (presenter, domNode) {
     const option = document.createElement('div')
     option.classList.add('struktoOption', 'codeIcon', 'tooltip', 'tooltip-bottomCode', 'hand', 'ToggleSourcecode')
-    option.setAttribute('data-tooltip', 'Quellcode einblenden')
+    option.setAttribute('data-tooltip', _s.sCode.showSourceCode)
     option.addEventListener('click', (event) => presenter.alterSourcecodeDisplay(event))
     domNode.appendChild(option)
   }
@@ -1010,12 +1013,12 @@ export class CodeView {
     const fields = document.getElementsByClassName(buttonClass)
     if (this.presenter.getSourcecodeDisplay()) {
       for (const item of fields) {
-        item.setAttribute('data-tooltip', 'Quellcode ausblenden')
+        item.setAttribute('data-tooltip', _s.sCode.hideSourceCode)
       }
       document.getElementById('SourcecodeDisplay').style.display = 'block'
     } else {
       for (const item of fields) {
-        item.setAttribute('data-tooltip', 'Quellcode einblenden')
+        item.setAttribute('data-tooltip', _s.sCode.showSourceCode)
       }
       document.getElementById('SourcecodeDisplay').style.display = 'none'
     }
