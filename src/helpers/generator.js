@@ -1,4 +1,7 @@
 import pkg from "../../package.json";
+// adds the language function to look up the corresponding language
+// all Text elements are saved in sGenerator.js (_s.sGenerator.KeyToText)
+import _s from '../lang/lang.js'
 
 /**
  * Generate a random id string
@@ -123,12 +126,12 @@ export function generateHtmltree () {
   footer.appendChild(footerDiv)
 
   const footerSpan = document.createElement('span')
-  footerSpan.appendChild(document.createTextNode('Repository: '))
+  footerSpan.appendChild(document.createTextNode(_s.sGenerator.repository))
   const repository = document.createElement('a');
   repository.href = "https://github.com/openpatch/struktog"
   repository.innerText = "GitHub"
   footerSpan.appendChild(repository)
-  footerSpan.appendChild(document.createTextNode(`, Version: `))
+  footerSpan.appendChild(document.createTextNode(_s.sGenerator.version))
   const version = document.createElement('a');
   version.href = "https://github.com/openpatch/struktog/blob/main/CHANGELOG.md";
   version.innerText = pkg.version;
@@ -140,7 +143,7 @@ export function generateResetButton (presenter, domNode) {
   // reset button must be last defined
   const resetButtonDiv = document.createElement('div')
   resetButtonDiv.classList.add('struktoOption', 'resetIcon', 'tooltip', 'tooltip-bottom', 'hand')
-  resetButtonDiv.setAttribute('data-tooltip', 'Reset')
+  resetButtonDiv.setAttribute('data-tooltip', _s.sGenerator.reset)
   resetButtonDiv.addEventListener('click', () => {
     const content = document.getElementById('modal-content')
     const footer = document.getElementById('modal-footer')
@@ -150,7 +153,7 @@ export function generateResetButton (presenter, domNode) {
     while (footer.hasChildNodes()) {
       footer.removeChild(footer.lastChild)
     }
-    content.appendChild(document.createTextNode('Alles löschen?'))
+    content.appendChild(document.createTextNode(_s.sGenerator.deleteAll))
     const doButton = document.createElement('div')
     doButton.classList.add('modal-buttons', 'acceptIcon', 'hand')
     doButton.addEventListener('click', () => presenter.resetModel())

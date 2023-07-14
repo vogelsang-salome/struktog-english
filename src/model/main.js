@@ -1,4 +1,7 @@
 import { guidGenerator } from '../helpers/generator'
+// adds the language function to look up the corresponding language
+// all Text elements are saved in sModel.js (_s.sModel.KeyToText)
+import _s from '../lang/lang.js'
 
 class Model {
   constructor (tree = {
@@ -225,7 +228,7 @@ class Model {
       subTree.cases.push({
         id: guidGenerator(),
         type: 'InsertCase',
-        text: 'Fall',
+        text: _s.sModel.case,
         followElement: {
           id: guidGenerator(),
           type: 'InsertNode',
