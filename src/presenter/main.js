@@ -1,5 +1,8 @@
 import { guidGenerator } from "../helpers/generator";
 import { deserializeState } from "../helpers/serde";
+// adds the language function to look up the corresponding language
+// all Text elements are saved in sPresenter.js (_s.sPresenter.KeyToText)
+import _s from '../lang/lang.js'
 
 export class Presenter {
   constructor(model) {
@@ -157,7 +160,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "TaskNode",
-          text: "Anweisung",
+          text: _s.sPresenter.statement,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -169,7 +172,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "BranchNode",
-          text: "Bedingung",
+          text: _s.sPresenter.condition,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -191,7 +194,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "CaseNode",
-          text: "Variable",
+          text: _s.sPresenter.variable,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -201,7 +204,7 @@ export class Presenter {
           defaultNode: {
             id: guidGenerator(),
             type: "InsertCase",
-            text: "Sonst",
+            text: _s.sPresenter.else,
             followElement: {
               id: guidGenerator(),
               type: "InsertNode",
@@ -212,7 +215,7 @@ export class Presenter {
             {
               id: guidGenerator(),
               type: "InsertCase",
-              text: "Fall",
+              text: _s.sPresenter.case,
               followElement: {
                 id: guidGenerator(),
                 type: "InsertNode",
@@ -222,7 +225,7 @@ export class Presenter {
             {
               id: guidGenerator(),
               type: "InsertCase",
-              text: "Fall",
+              text: _s.sPresenter.case,
               followElement: {
                 id: guidGenerator(),
                 type: "InsertNode",
@@ -236,7 +239,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "CountLoopNode",
-          text: "Zählbedingung",
+          text: _s.sPresenter.countingCondition,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -253,7 +256,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "HeadLoopNode",
-          text: "Gültigkeitsbedingung",
+          text: _s.sPresenter.validityCondition,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -289,7 +292,7 @@ export class Presenter {
         this.nextInsertElement = {
           id: guidGenerator(),
           type: "FootLoopNode",
-          text: "Gültigkeitsbedingung",
+          text: _s.sPresenter.validityCondition,
           followElement: {
             id: guidGenerator(),
             type: "InsertNode",
@@ -493,7 +496,7 @@ export class Presenter {
     }
     content.appendChild(
       document.createTextNode(
-        "Dieses Element und alle darin erstellten Blöcke löschen?"
+        _s.sPresenter.deleteQuestion
       )
     );
     const doButton = document.createElement("div");

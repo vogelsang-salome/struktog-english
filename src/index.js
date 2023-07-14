@@ -9,6 +9,7 @@ import { generateHtmltree } from "./helpers/generator";
 
 import "./assets/scss/structog.scss";
 
+
 window.onload = function () {
   generateHtmltree();
   // create presenter object
