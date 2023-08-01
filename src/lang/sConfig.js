@@ -12,15 +12,15 @@ export default{
     de: "Anweisung"
    },
    counterControlledLoop: {
-    en: "counter controlled loop",
+    en: "counting loop",
     de: "Zählergesteuerte Schleife"
    },
    headerControlledLoop: {
-    en: "header controlled loop",
+    en: "header testing loop",
     de: "Kopfgesteuerte Schleife"
    },
    footerControlledLoop: {
-    en: "footer controlled loop",
+    en: "footer testing loop",
     de: "Fußgesteuerte Schleife"
    },
    branch: {
